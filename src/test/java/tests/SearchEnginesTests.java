@@ -1,6 +1,7 @@
 package tests;
 
 import com.codeborne.selenide.Configuration;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.text;
@@ -12,6 +13,12 @@ import static com.codeborne.selenide.Selenide.open;
 
 public class SearchEnginesTests {
 
+    @BeforeAll
+    static public void setUp() {
+        Configuration.startMaximized = true;
+        Configuration.browser = "edge";
+    }
+
     @Test
     void testGoogleSearch() {
         open("https://www.google.com");
@@ -21,8 +28,6 @@ public class SearchEnginesTests {
 
     @Test
     public void testYandexSearch() {
-        Configuration.startMaximized = true;
-        Configuration.browser = "edge";
         open("https://yandex.ru/");
         $("#text").val("selenide");
         $(byText("Найти")).click();
