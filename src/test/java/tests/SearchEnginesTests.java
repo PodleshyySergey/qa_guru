@@ -8,8 +8,7 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byName;
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 
 public class SearchEnginesTests {
 
@@ -33,6 +32,15 @@ public class SearchEnginesTests {
         $(byText("Найти")).click();
 
         $(byText("ru.selenide.org")).shouldBe(visible);
+    }
+
+    @Test
+    public void testRamblerSearch() {
+        open("https://www.rambler.ru/");
+        $("[placeholder='Искать в интернете']").val("selenide");
+        $(byText("Найти")).click();
+        sleep(2000);
+        $("html").shouldHave(text("selenide.org/"));
     }
 
 }
